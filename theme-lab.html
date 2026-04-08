@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Theme Lab Mobile</title>
+    <style>
+        :root {
+            /* Default variables */
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #13131a;
+            --bg-tertiary: #1c1c26;
+            --bg-card: #1a1a24;
+            --bg-input: #222230;
+            --text-primary: #e8e8f0;
+            --text-secondary: #9090a8;
+            --text-muted: #555568;
+            --text-inverse: #0a0a0f;
+            --border-default: #2a2a38;
+            --border-active: #44445a;
+            --accent-primary: #00d4aa;
+            --accent-primary-dim: rgba(0,212,170,0.15);
+            --accent-confirm: #00c87a;
+            --accent-warning: #ff9f43;
+            --accent-danger: #ff4d6a;
+            --shadow-card: 0 2px 12px rgba(0,0,0,0.6);
+            --shadow-sheet: 0 -4px 40px rgba(0,0,0,0.8);
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: -apple-system, system-ui, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-default);
+            flex-shrink: 0;
+        }
+
+        /* Horizontal Scrollable Theme Picker */
+        .theme-scroll {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .theme-scroll::-webkit-scrollbar { display: none; }
+
+        .t-btn {
+            padding: 8px 16px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-default);
+            color: var(--text-primary);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .content {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-default);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .label {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-default);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px; /* Prevents auto-zoom on iOS */
+            margin: 12px 0;
+            box-sizing: border-box;
+        }
+
+        /* Circular Mood Elements */
+        .mood-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        .mood-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .swatch {
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        footer {
+            padding: 16px;
+            padding-bottom: calc(16px + env(safe-area-inset-bottom));
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-default);
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="font-size: 18px; font-weight: 900; margin-bottom: 8px;">THEME <span style="color: var(--accent-primary)">LAB</span></div>
+        <div class="theme-scroll" id="themePicker"></div>
+    </header>
+
+    <div class="content">
+        <div class="card">
+            <span class="label">Readability Stress Test</span>
+            <h2 style="margin: 0; color: var(--text-primary); font-size: 20px;">Heading Text</h2>
+            <p style="color: var(--text-secondary); line-height: 1.5; font-size: 15px;">
+                Checking how primary and secondary text contrasts against the card background.
+            </p>
+            <input type="text" placeholder="Focus State Check...">
+            <div style="display: flex; gap: 8px;">
+                <button style="flex: 1; padding: 14px; border-radius: 12px; border: none; background: var(--accent-primary); color: var(--text-inverse); font-weight: 700;">Action</button>
+                <button style="flex: 1; padding: 14px; border-radius: 12px; border: none; background: var(--bg-tertiary); color: var(--text-primary); font-weight: 700;">Cancel</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="label">Range Circles</span>
+            <div class="mood-row">
+                <div class="mood-circle" style="background: var(--mood-1);"></div>
+                <div class="mood-circle" style="background: var(--mood-2);"></div>
+                <div class="mood-circle" style="background: var(--mood-3);"></div>
+                <div class="mood-circle" style="background: var(--mood-4);"></div>
+                <div class="mood-circle" style="background: var(--mood-5);"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <span class="label">System Status</span>
+            <div class="status-grid">
+                <div class="swatch" style="background: var(--accent-confirm); color: var(--text-inverse);">SUCCESS</div>
+                <div class="swatch" style="background: var(--accent-warning); color: var(--text-inverse);">WARNING</div>
+                <div class="swatch" style="background: var(--accent-danger); color: #fff;">DANGER</div>
+                <div class="swatch" style="background: var(--accent-warning-live); color: #000; border: 2px solid var(--text-primary);">LIVE</div>
+            </div>
+            <div style="margin-top: 12px; padding: 12px; background: var(--accent-primary-dim); border-radius: 8px; border: 1px solid var(--accent-primary); text-align: center;">
+                <span style="color: var(--accent-primary); font-size: 12px; font-weight: 700;">Dimmed Primary Accent</span>
+            </div>
+        </div>
+
+        <div class="card" style="background: var(--bg-tertiary); box-shadow: var(--shadow-sheet); border: none;">
+            <span class="label">Sheet Elevation</span>
+            <p style="color: var(--text-muted); font-size: 13px; margin: 0;">
+                Testing depth with Tertiary BG and Sheet Shadow.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div style="width: 24px; height: 24px; border-radius: 6px; background: var(--accent-primary);"></div>
+        <div style="width: 24px; height: 24px; border-radius: 6px; background: var(--text-muted);"></div>
+        <div style="width: 24px; height: 24px; border-radius: 6px; background: var(--text-muted);"></div>
+    </footer>
+
+    <script>
+        const THEMES = {
+            carbon: { css: { '--bg-primary': '#0a0a0f', '--bg-secondary': '#13131a', '--bg-tertiary': '#1c1c26', '--bg-card': '#1a1a24', '--bg-input': '#222230', '--text-primary': '#e8e8f0', '--text-secondary': '#9090a8', '--text-muted': '#555568', '--text-inverse': '#0a0a0f', '--border-default': '#2a2a38', '--border-active': '#44445a', '--accent-primary': '#00d4aa', '--accent-primary-dim': 'rgba(0,212,170,0.15)', '--accent-secondary': '#7c5cfc', '--accent-confirm': '#00c87a', '--accent-warning': '#ff9f43', '--accent-warning-live': '#ffcc02', '--accent-danger': '#ff4d6a', '--mood-1': '#ff4d6a', '--mood-2': '#ff9f43', '--mood-3': '#ffe066', '--mood-4': '#a0e67e', '--mood-5': '#00d4aa', '--shadow-card': '0 2px 12px rgba(0,0,0,0.6)', '--shadow-sheet': '0 -4px 40px rgba(0,0,0,0.8)' } },
+            aurora: { css: { '--bg-primary': '#0d1117', '--bg-secondary': '#161b22', '--bg-tertiary': '#1f2937', '--bg-card': '#1a2332', '--bg-input': '#21283a', '--text-primary': '#cdd9e5', '--text-secondary': '#768390', '--text-muted': '#444c56', '--text-inverse': '#0d1117', '--border-default': '#21262d', '--border-active': '#388bfd', '--accent-primary': '#39d353', '--accent-primary-dim': 'rgba(57,211,83,0.12)', '--accent-secondary': '#58a6ff', '--accent-confirm': '#39d353', '--accent-warning': '#e3b341', '--accent-warning-live': '#ffa657', '--accent-danger': '#f85149', '--mood-1': '#f85149', '--mood-2': '#ffa657', '--mood-3': '#e3b341', '--mood-4': '#3fb950', '--mood-5': '#58a6ff', '--shadow-card': '0 2px 12px rgba(0,0,0,0.7)', '--shadow-sheet': '0 -4px 40px rgba(0,0,0,0.85)' } },
+            ember: { css: { '--bg-primary': '#100800', '--bg-secondary': '#1a0f00', '--bg-tertiary': '#261500', '--bg-card': '#221100', '--bg-input': '#2e1800', '--text-primary': '#f4e4c0', '--text-secondary': '#a07840', '--text-muted': '#5a3d18', '--text-inverse': '#100800', '--border-default': '#2e1800', '--border-active': '#c04010', '--accent-primary': '#ff6a00', '--accent-primary-dim': 'rgba(255,106,0,0.15)', '--accent-secondary': '#ffb300', '--accent-confirm': '#a0c840', '--accent-warning': '#ffb300', '--accent-warning-live': '#ffcc02', '--accent-danger': '#ff2d20', '--mood-1': '#ff2d20', '--mood-2': '#ff6a00', '--mood-3': '#ffb300', '--mood-4': '#c8e820', '--mood-5': '#00e5cc', '--shadow-card': '0 2px 16px rgba(255,80,0,0.25)', '--shadow-sheet': '0 -4px 40px rgba(0,0,0,0.9)' } },
+            frost: { css: { '--bg-primary': '#f0f6fa', '--bg-secondary': '#e0ecf4', '--bg-tertiary': '#d0e4f0', '--bg-card': '#e8f2f8', '--bg-input': '#d8ecf6', '--text-primary': '#1a2a38', '--text-secondary': '#4a6a82', '--text-muted': '#8aacbe', '--text-inverse': '#f0f6fa', '--border-default': '#c0d8e8', '--border-active': '#2c7bb0', '--accent-primary': '#0070b0', '--accent-primary-dim': 'rgba(0,112,176,0.12)', '--accent-secondary': '#8040c0', '--accent-confirm': '#00a060', '--accent-warning': '#d07020', '--accent-warning-live': '#f09000', '--accent-danger': '#d02040', '--mood-1': '#d02040', '--mood-2': '#d07020', '--mood-3': '#c0a000', '--mood-4': '#40a060', '--mood-5': '#0070b0', '--shadow-card': '0 2px 12px rgba(0,80,140,0.12)', '--shadow-sheet': '0 -4px 30px rgba(0,0,0,0.15)' } },
+            neon: { css: { '--bg-primary': '#07000f', '--bg-secondary': '#100020', '--bg-tertiary': '#18003a', '--bg-card': '#130030', '--bg-input': '#1c0040', '--text-primary': '#f0e8ff', '--text-secondary': '#a080c0', '--text-muted': '#5a3a80', '--text-inverse': '#07000f', '--border-default': '#280060', '--border-active': '#c000ff', '--accent-primary': '#c000ff', '--accent-primary-dim': 'rgba(192,0,255,0.15)', '--accent-secondary': '#00ffcc', '--accent-confirm': '#00ff88', '--accent-warning': '#ffaa00', '--accent-warning-live': '#ff4400', '--accent-danger': '#ff0060', '--mood-1': '#ff0060', '--mood-2': '#ff4400', '--mood-3': '#ffaa00', '--mood-4': '#00ff88', '--mood-5': '#00ffcc', '--shadow-card': '0 2px 20px rgba(192,0,255,0.3)', '--shadow-sheet': '0 -4px 40px rgba(0,0,0,0.95)' } },
+            slate: { css: { '--bg-primary': '#181d26', '--bg-secondary': '#202633', '--bg-tertiary': '#282e3d', '--bg-card': '#242a38', '--bg-input': '#2c3344', '--text-primary': '#d4d8e8', '--text-secondary': '#7880a0', '--text-muted': '#454d68', '--text-inverse': '#181d26', '--border-default': '#2e3548', '--border-active': '#5060a0', '--accent-primary': '#6878f0', '--accent-primary-dim': 'rgba(104,120,240,0.15)', '--accent-secondary': '#50d0c0', '--accent-confirm': '#50d098', '--accent-warning': '#e0a050', '--accent-warning-live': '#f0c040', '--accent-danger': '#e05060', '--mood-1': '#e05060', '--mood-2': '#e0a050', '--mood-3': '#d0c840', '--mood-4': '#60c880', '--mood-5': '#6878f0', '--shadow-card': '0 2px 12px rgba(0,0,0,0.5)', '--shadow-sheet': '0 -4px 40px rgba(0,0,0,0.8)' } },
+            sakura: { css: { '--bg-primary': '#140810', '--bg-secondary': '#200e1c', '--bg-tertiary': '#2c1428', '--bg-card': '#261028', '--bg-input': '#321634', '--text-primary': '#f8d8e8', '--text-secondary': '#c080a0', '--text-muted': '#6a3850', '--text-inverse': '#140810', '--border-default': '#3a1838', '--border-active': '#d060a0', '--accent-primary': '#ff80c0', '--accent-primary-dim': 'rgba(255,128,192,0.15)', '--accent-secondary': '#c060e0', '--accent-confirm': '#80e0a0', '--accent-warning': '#ffa040', '--accent-warning-live': '#ff6040', '--accent-danger': '#ff4060', '--mood-1': '#ff4060', '--mood-2': '#ffa040', '--mood-3': '#ffe060', '--mood-4': '#80e0a0', '--mood-5': '#ff80c0', '--shadow-card': '0 2px 16px rgba(255,0,128,0.2)', '--shadow-sheet': '0 -4px 40px rgba(0,0,0,0.9)' } },
+            desert: { css: { '--bg-primary': '#161008', '--bg-secondary': '#201808', '--bg-tertiary': '#2c2010', '--bg-card': '#281c0c', '--bg-input': '#342414', '--text-primary': '#f0dca0', '--text-secondary': '#a08040', '--text-muted': '#5a4420', '--text-inverse': '#161008', '--border-default': '#342414', '--border-active': '#c88020', '--accent-primary': '#e0a020', '--accent-primary-dim': 'rgba(224,160,32,0.15)', '--accent-secondary': '#c05020', '--accent-confirm': '#60c840', '--accent-warning': '#e08020', '--accent-warning-live': '#ffc040', '--accent-danger': '#d03020', '--mood-1': '#d03020', '--mood-2': '#e08020', '--mood-3': '#e0c020', '--mood-4': '#80c840', '--mood-5': '#40b0c0', '--shadow-card': '0 2px 12px rgba(0,0,0,0.6)', '--shadow-sheet': '0 -4px 40px rgba(0,0,0,0.85)' } }
+        };
+
+        const themePicker = document.getElementById('themePicker');
+        Object.keys(THEMES).forEach(name => {
+            const btn = document.createElement('button');
+            btn.className = 't-btn';
+            btn.innerText = name;
+            btn.onclick = () => applyTheme(name);
+            themePicker.appendChild(btn);
+        });
+
+        function applyTheme(name) {
+            const root = document.documentElement;
+            const theme = THEMES[name];
+            if (!theme) return;
+            Object.entries(theme.css).forEach(([prop, val]) => {
+                root.style.setProperty(prop, val);
+            });
+        }
+
+        applyTheme('carbon');
+    </script>
+</body>
+</html>
